@@ -17,6 +17,7 @@ const Login = ({ setIsAuthenticated }) => {
             console.log("User logged in:", user);
             setIsAuthenticated(true);
         } catch (error) {
+            alert("Error logging in");
             console.error("Error logging in:", error);
         }
     };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import imageData from './imageData';
 import Lightbox from './LightBox';
+import Footer from './footer';
 import Login from './Login';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -88,6 +89,7 @@ const ImageGallery = () => {
                             />
                         ))}
                     </ul>
+                    <Footer />
                 </DndProvider>
             ) : (
                 <Login setIsAuthenticated={setIsAuthenticated} />
