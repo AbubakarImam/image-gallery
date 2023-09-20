@@ -2,6 +2,7 @@ import { useState } from 'react';
 import imageData from './imageData';
 import Lightbox from './LightBox';
 import Footer from './footer';
+import Loading from './loading';
 import Login from './Login';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -14,6 +15,8 @@ const ImageGallery = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [filteredImages, setFilteredImages] = useState(null); // Add state for filtered images
+    const [isLoadingContent, setIsLoadingContent] = useState(false);
+
 
     // Add a state to manage the order of images
     const [images, setImages] = useState(imageData);
@@ -60,39 +63,42 @@ const ImageGallery = () => {
     return (
         <div className="">
             {isAuthenticated ? (
-                <DndProvider backend={HTML5Backend}>
-                    <SearchBar handleSearch={handleSearch} />
-                    <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                        {filteredImages ? filteredImages.map((image, index) => (
-                            <ImageItem
-                                key={image.id}
-                                image={image}
-                                index={index}
-                                moveImage={moveImage}
-                                selectedImage={selectedImage}
-                                openLightbox={openLightbox}
-                                closeLightbox={closeLightbox}
-                                isLoading={isLoading}
-                                handleImageLoad={handleImageLoad}
-                            />
-                        )) : images.map((image, index) => (
-                            <ImageItem
-                                key={image.id}
-                                image={image}
-                                index={index}
-                                moveImage={moveImage}
-                                selectedImage={selectedImage}
-                                openLightbox={openLightbox}
-                                closeLightbox={closeLightbox}
-                                isLoading={isLoading}
-                                handleImageLoad={handleImageLoad}
-                            />
-                        ))}
-                    </ul>
-                    <Footer />
-                </DndProvider>
+                <>
+                    <DndProvider backend={HTML5Backend}>
+                        <SearchBar handleSearch={handleSearch} />
+                        <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+                            {filteredImages ? filteredImages.map((image, index) => (
+                                <ImageItem
+                                    key={image.id}
+                                    image={image}
+                                    index={index}
+                                    moveImage={moveImage}
+                                    selectedImage={selectedImage}
+                                    openLightbox={openLightbox}
+                                    closeLightbox={closeLightbox}
+                                    isLoading={isLoading}
+                                    handleImageLoad={handleImageLoad}
+                                />
+                            )) : images.map((image, index) => (
+                                <ImageItem
+                                    key={image.id}
+                                    image={image}
+                                    index={index}
+                                    moveImage={moveImage}
+                                    selectedImage={selectedImage}
+                                    openLightbox={openLightbox}
+                                    closeLightbox={closeLightbox}
+                                    isLoading={isLoading}
+                                    handleImageLoad={handleImageLoad}
+                                />
+                            ))}
+                        </ul>
+                        <Footer />
+                    </DndProvider>
+                    {isLoadingContent && <Loading />}
+                </>
             ) : (
-                <Login setIsAuthenticated={setIsAuthenticated} />
+                <Login setIsAuthenticated={setIsAuthenticated} setIsLoadingContent={setIsLoadingContent} />
             )}
 
             {selectedImage && (

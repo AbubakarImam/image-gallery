@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../../firebase";
 
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = ({ setIsAuthenticated, setIsLoadingContent }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -12,13 +12,16 @@ const Login = ({ setIsAuthenticated }) => {
         e.preventDefault();
 
         try {
+            setIsLoadingContent(true);
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             console.log("User logged in:", user);
             setIsAuthenticated(true);
+            setIsLoadingContent(false);
         } catch (error) {
             alert("Error logging in");
             console.error("Error logging in:", error);
+            setIsLoadingContent(false);
         }
     };
 
@@ -57,7 +60,8 @@ const Login = ({ setIsAuthenticated }) => {
 };
 
 Login.propTypes = {
-    setIsAuthenticated: PropTypes.func.isRequired
+    setIsAuthenticated: PropTypes.func.isRequired,
+    setIsLoadingContent: PropTypes.func.isRequired
 };
 
 export default Login;
