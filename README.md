@@ -31,7 +31,7 @@ Before running the project, ensure you have the following dependencies installed
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/vite-react-image-gallery.git
+git clone https://github.com/AbubakarImam/image-gallery.git
 ```
 
 2. Navigate to the project directory:
