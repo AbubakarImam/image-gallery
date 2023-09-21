@@ -30,19 +30,9 @@ const imageData = [
         tag: "Animal",
     },
     {
-        id: 4,
-        imageUrl: "https://images.unsplash.com/photo-1693672761919-d4cc6d20ab2b?...",
-        tag: "Abstract",
-    },
-    {
         id: 5,
         imageUrl: "https://images.unsplash.com/photo-1675410589547-cc3e77488188?...",
         tag: "City",
-    },
-    {
-        id: 6,
-        imageUrl: "https://images.unsplash.com/photo-1516410529446-2c777cb7366d?...",
-        tag: "Nature",
     },
     {
         id: 7,
